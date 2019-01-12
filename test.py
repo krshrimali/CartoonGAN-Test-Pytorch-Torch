@@ -72,7 +72,7 @@ for files in os.listdir(opt.input_dir):
 	output_image = model(input_image)
 	output_image = output_image[0]
 	# BGR -> RGB
-	output_image = output_image[[2, 1, 0], :, :]
+	# output_image = output_image[[2, 1, 0], :, :]
 	# deprocess, (0, 1)
 	output_image = output_image.data.cpu().float() * 0.5 + 0.5
 	# save
