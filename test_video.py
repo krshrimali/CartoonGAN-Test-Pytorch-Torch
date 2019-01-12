@@ -84,6 +84,6 @@ if(opt.video != 'none'):
                 # deprocess, (0, 1)
                 output_image = output_image.data.cpu().float() * 0.5 + 0.5
                 # save
-                out.write(output_image)
+                out.write(np.asarray(output_image))
                 # vutils.save_image(output_image, os.path.join(opt.video, files[:-4] + '_' + opt.style + '.jpg'))
             print('Done!')
