@@ -70,9 +70,9 @@ for files in os.listdir(opt.input_dir):
 	output_image = output_image[[2, 1, 0], :, :]
 	# deprocess, (0, 1)
 	output_image = output_image.data.cpu().float() * 0.5 + 0.5
-        cv2.imshow("output_image", output_image)
-        cv2.waitKey(1)
+	cv2.imshow("output_image", output_image)
+	cv2.waitKey(1)
 	# save
 	# vutils.save_image(output_image, os.path.join(opt.output_dir, files[:-4] + '_' + opt.style + '.jpg'))
-    cv2.destroyAllWindows()
+cv2.destroyAllWindows()
 print('Done!')
