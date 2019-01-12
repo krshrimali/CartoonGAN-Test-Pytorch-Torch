@@ -37,6 +37,8 @@ else:
     print('CPU mode')
     model.float()
 
+count = 0
+
 if(opt.video != 'none'):
     vid = cv2.VideoCapture(opt.video)
     if(vid.isOpened()==False):
@@ -48,7 +50,8 @@ if(opt.video != 'none'):
         out = cv2.VideoWriter('outpy.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10, (frame_width, frame_height))
         while(vid.isOpened()):
             ret, frame = vid.read()
-            if ret == True:
+            count += 1
+            if(ret == True and count % 20 == 0):
                 # frame
                 # input_image = cv2.imread(os.path.join(opt.input_dir, files), 1)
                 input_image = frame
