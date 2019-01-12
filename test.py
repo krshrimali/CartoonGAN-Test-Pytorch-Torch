@@ -46,6 +46,8 @@ for files in os.listdir(opt.input_dir):
 	# resize image, keep aspect ratio
 	h = input_image.shape[0]
 	w = input_image.shape[1]
+	# h = input_image.size[0]
+	# w = input_image.size[1]
 	ratio = h *1.0 / w
 	if ratio > 1:
 		h = opt.load_size
@@ -53,7 +55,8 @@ for files in os.listdir(opt.input_dir):
 	else:
 		w = opt.load_size
 		h = int(w * ratio)
-	input_image = input_image.resize((h, w), Image.BICUBIC)
+	input_image = cv2.resize(input_image, (h, w), cv2.INTER_CUBIC)
+	# input_image = input_image.resize((h, w), Image.BICUBIC)
 	input_image = np.asarray(input_image)
 	# RGB -> BGR
 	input_image = input_image[:, :, [2, 1, 0]]
@@ -71,9 +74,6 @@ for files in os.listdir(opt.input_dir):
 	output_image = output_image[[2, 1, 0], :, :]
 	# deprocess, (0, 1)
 	output_image = output_image.data.cpu().float() * 0.5 + 0.5
-	cv2.imshow("output_image", output_image)
-	cv2.waitKey(1)
 	# save
-	# vutils.save_image(output_image, os.path.join(opt.output_dir, files[:-4] + '_' + opt.style + '.jpg'))
-cv2.destroyAllWindows()
+	vutils.save_image(output_image, os.path.join(opt.output_dir, files[:-4] + '_' + opt.style + '.jpg'))
 print('Done!')
