@@ -2,6 +2,7 @@ import torch
 import os
 import numpy as np
 import argparse
+import cv2
 from PIL import Image
 import torchvision.transforms as transforms
 from torch.autograd import Variable
@@ -39,8 +40,9 @@ for files in os.listdir(opt.input_dir):
 	if ext not in valid_ext:
 		continue
 	# load image
-	input_image = Image.open(os.path.join(opt.input_dir, files)).convert("RGB")
-	# resize image, keep aspect ratio
+	# input_image = Image.open(os.path.join(opt.input_dir, files)).convert("RGB")
+        input_image = cv2.imread(os.path.join(opt.input_dir, files))
+        # resize image, keep aspect ratio
 	h = input_image.size[0]
 	w = input_image.size[1]
 	ratio = h *1.0 / w
@@ -68,7 +70,9 @@ for files in os.listdir(opt.input_dir):
 	output_image = output_image[[2, 1, 0], :, :]
 	# deprocess, (0, 1)
 	output_image = output_image.data.cpu().float() * 0.5 + 0.5
+        cv2.imshow("output_image", output_image)
+        cv2.waitKey(1)
 	# save
-	vutils.save_image(output_image, os.path.join(opt.output_dir, files[:-4] + '_' + opt.style + '.jpg'))
-
+	# vutils.save_image(output_image, os.path.join(opt.output_dir, files[:-4] + '_' + opt.style + '.jpg'))
+    cv2.destroyAllWindows()
 print('Done!')
