@@ -89,4 +89,5 @@ if(opt.video != 'none'):
                 # save
                 out.write(np.uint8(output_image))
                 # vutils.save_image(output_image, os.path.join(opt.video, files[:-4] + '_' + opt.style + '.jpg'))
+            out.release()
             print('Done!')
