@@ -8,6 +8,7 @@ import torchvision.transforms as transforms
 from torch.autograd import Variable
 import torchvision.utils as vutils
 from network.Transformer import Transformer
+import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--input_dir', default = 'test_img')
@@ -75,5 +76,7 @@ for files in os.listdir(opt.input_dir):
 	# deprocess, (0, 1)
 	output_image = output_image.data.cpu().float() * 0.5 + 0.5
 	# save
+	plt.imshow("output_image", output_image) # for colab
+	plt.show()
 	vutils.save_image(output_image, os.path.join(opt.output_dir, files[:-4] + '_' + opt.style + '.jpg'))
 print('Done!')
