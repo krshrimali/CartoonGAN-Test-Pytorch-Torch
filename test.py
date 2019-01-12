@@ -20,7 +20,7 @@ parser.add_argument('--gpu', type=int, default = 0)
 
 opt = parser.parse_args()
 
-valid_ext = ['.jpg', '.png']
+valid_ext = ['.jpg', '.png', 'jpeg']
 
 if not os.path.exists(opt.output_dir): os.mkdir(opt.output_dir)
 
@@ -76,7 +76,5 @@ for files in os.listdir(opt.input_dir):
 	# deprocess, (0, 1)
 	output_image = output_image.data.cpu().float() * 0.5 + 0.5
 	# save
-	plt.imshow("output_image", output_image) # for colab
-	plt.show()
 	vutils.save_image(output_image, os.path.join(opt.output_dir, files[:-4] + '_' + opt.style + '.jpg'))
 print('Done!')
