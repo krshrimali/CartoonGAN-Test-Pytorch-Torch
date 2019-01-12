@@ -56,7 +56,7 @@ for files in os.listdir(opt.input_dir):
 	else:
 		w = opt.load_size
 		h = int(w * ratio)
-	input_image = cv2.resize(input_image, (h, w), cv2.INTER_CUBIC)
+	input_image = cv2.resize(input_image, (w, h), cv2.INTER_CUBIC)
 	# input_image = input_image.resize((h, w), Image.BICUBIC)
 	input_image = np.asarray(input_image)
 	# RGB -> BGR
