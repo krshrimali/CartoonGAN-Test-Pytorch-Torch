@@ -41,6 +41,7 @@ for files in os.listdir(opt.input_dir):
 		continue
 	# load image
 	# input_image = Image.open(os.path.join(opt.input_dir, files)).convert("RGB")
+	print("path is: {}".format(os.path.join(opt.input_dir, files)))
 	input_image = cv2.imread(os.path.join(opt.input_dir, files), 1)
 	# resize image, keep aspect ratio
 	h = input_image.size[0]
